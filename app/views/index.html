@@ -7,8 +7,10 @@
   </head>
 
   <body>
+    <h1>Home</h1>
     {% if user %}
-      You are logged in
+      You are logged in, you can order for collection
+      <a href="/order">here</a>
     {% else %}
       Please login
       <a href="/login">here</a>

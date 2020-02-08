@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "pickup": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins", "Salt", "Pepper", "Vinegar"]
+            }
+          },
+          "sauces": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Tzaziki", "Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"]
+            }
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "special": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
