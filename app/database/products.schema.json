@@ -18,7 +18,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins"]
+        "enum": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins", "Salt", "Pepper", "Vinegar"]
       }
     },
     "sauces": {

@@ -1,1 +1,76 @@
-{"$schema": "./products.schema"}
+{
+  "$schema": "./products.schema.json",
+  "item": [{
+    "name": "Falafel Wrap",
+    "description": "Falafel Wrap with Hummus",
+    "image": "DSC_9632.jpg",
+    "type": "Falafel",
+    "price": 5.00,
+    "ingredients": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins"],
+    "sauces": ["Tzaziki", "Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"],
+    "options": [{
+      "name": "Hummus",
+      "price": 0.00
+    }]
+  }, {
+    "name": "Salad Box",
+    "description": "Salad Box with Hummus",
+    "image": "DSC_9638.jpg",
+    "type": "Falafel",
+    "price": 6.00,
+    "ingredients": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins"],
+    "sauces": ["Tzaziki", "Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"],
+    "options": []
+  }, {
+    "name": "Falafel Box",
+    "description": "Falafel Box with Hummus and Parsip Chips",
+    "image": "DSC_9638.jpg",
+    "type": "Falafel",
+    "price": 6.00,
+    "ingredients": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins"],
+    "sauces": ["Tzaziki", "Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"],
+    "options": []
+  }, {
+    "name": "3 Falafel Balls",
+    "description": "Falafel Balls with Hummus and Pita",
+    "image": "DSC_9564.jpg",
+    "type": "Falafel",
+    "price": 1.90,
+    "ingredients": [],
+    "sauces": [],
+    "options": [{
+      "name": "Vegan Pesto",
+      "price": 0.30
+    }]
+  }, {
+    "name": "5 Falafel Balls",
+    "description": "Falafel Balls with Hummus and Pita",
+    "image": "DSC_9564.jpg",
+    "type": "Falafel",
+    "price": 2.90,
+    "ingredients": [],
+    "sauces": [],
+    "options": [{
+      "name": "Vegan Pesto",
+      "price": 0.30
+    }]
+  }, {
+    "name": "Parsip Chips",
+    "description": "Homemade Parsip Chips",
+    "image": "DSC_9687.jpg",
+    "type": "Sides",
+    "price": 2.00,
+    "ingredients": ["Salt", "Pepper"],
+    "sauces": [],
+    "options": []
+  }, {
+    "name": "Side Salad",
+    "description": "Homemade Parsip Chips",
+    "image": "DSC_9687.jpg",
+    "type": "Sides",
+    "price": 1.60,
+    "ingredients": ["Salt", "Pepper", "Vinegar"],
+    "sauces": [],
+    "options": []
+  }]
+}

@@ -1,1 +1,3 @@
-{"$schema": "./userbase.schema"}
+{
+  "$schema": "./userbase.schema.json"
+}

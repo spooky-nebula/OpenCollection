@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
-  <meta charset="utf-8">
-  <title>Home</title>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+  </head>
 
-<body>
-
-</body>
+  <body>
+    {% if user %}
+      You are logged in
+    {% else %}
+      Please login
+      <a href="/login">here</a>
+    {% endif %}
+  </body>
 
 </html>
