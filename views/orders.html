@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Orders</title>
+</head>
+
+<body>
+  <h1>Orders</h1>
+  {% if user.username == "admin" %}
+  <div class="admin">
+    <p>Access the admin dashboard
+      <a href="/line">here</a>
+    </p>
+  </div>
+  {% endif %}
+
+  {% if user %}
+  <div class="profile">
+    <p>
+      Logged in as
+      {{user.name}}
+      ({{user.username}}).
+      <a href="/logout">Logout</a>
+    </p>
+  </div>
+  {% else %}
+  <div class="profile">
+    <p>
+      Please login
+      <a href="/login">here</a>
+    </p>
+  </div>
+  {% endif %}
+  <h2>Orders</h2>
+  <div class="orders">
+    <h4>There is no orders for you currently</h4>
+  </div>
+  <h2>Old Orders</h2>
+  <div class="oldorders">
+    <h4>You haven't ordered anything in the past</h4>
+  </div>
+  <template id="order" hidden="hidden">
+    <div class="order">
+      <h2 class="date">date</h2>
+      <h2 class="status">Your order is: <span class="orderstatus">Being prepared</span></h2>
+      <div class="items"></div>
+      <h3 class="total">totalprice</h3>
+    </div>
+  </template>
+  <template id="item" hidden="hidden">
+    <div class="item">
+      <h3>itemname</h3>
+      <p class="ingredients">Ingredients:
+      </p>
+      <p class="sauces">Sauces:
+      </p>
+      <p class="options">Options:
+      </p>
+    </div>
+  </template>
+  <script src="/javascript/socket.io.js"></script>
+  <script>
+    var socket = io();
+    // o stands for orders
+    var o = new String('{{orders}}');
+    // oo stands for old orders
+    var oo = new String('{{oldorders}}');
+  </script>
+  <script src="/javascript/orders.js" charset="utf-8"></script>
+</body>
+
+</html>

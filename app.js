@@ -90,7 +90,6 @@ app.get('/order', require('connect-ensure-login').ensureLoggedIn(), function(req
   // db.database.getProducts(function(data) {
   res.render('order.html', {
     user: req.user
-    // products: data
   });
   // });
 });
@@ -99,9 +98,26 @@ app.post('/order', function(req, res) {
   // attach POST to order schema
   var order = {
     user: req.user,
-    order: req.order
+    cart: JSON.parse(req.body.cart),
+    stamp: new Date().toDateString(),
+    price: req.body.price,
+    ready: req.body.ready
   };
-  res.redirect('/order');
+  // console.log(order);
+  orders.push(order);
+  updateLine();
+  res.redirect('/orders');
+});
+
+app.get('/orders', require('connect-ensure-login').ensureLoggedIn(), function(req, res) {
+  let userOrders = findOrdersByUsername(req.user.username);
+  db.database.findOldOrdersByUsername(req.user.username, function(userOldOrders) {
+    res.render('orders.html', {
+      user: req.user,
+      orders: JSON.stringify(userOrders),
+      oldorders: JSON.stringify(userOldOrders)
+    });
+  });
 });
 
 app.get('/login', function(req, res) {
@@ -152,21 +168,41 @@ app.get('/line', require('connect-ensure-login').ensureLoggedIn(), function(req,
 });
 
 io.on('connection', function(socket) {
-  console.info('poo user connected');
+  console.info(socket.id + ' connected');
 
   socket.on('get products', function() {
     db.database.getProducts(function(products) {
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
       socket.emit("gotten products", {
         products: products
       });
     });
   });
 
-  socket.on('order', function(data) {
-    let cart = data.cart;
-    console.log("BBBBBBBBBBBBBB");
+  socket.on('line connected', function(data) {
+    updateLine();
   });
+
+  socket.on('order done', function(data) {
+    orders[data.orderid].ready = true;
+    updateLine();
+  });
+
+  socket.on('order remove', function(data) {
+    db.database.saveOldOrder(orders[data.orderid], function(data) {
+      orders.splice(data.orderid, 1);
+      updateLine();
+    });
+  });
+
+  socket.on('product disable', function(data) {
+    db.database.disableProduct(data, function() {});
+  });
+
+  socket.on('product enable', function(data) {
+    db.database.enableProduct(data, function() {});
+  });
+
+  socket.on('product add', function(data) {});
 
   socket.on('open up shop', function() {
     open = true;
@@ -177,10 +213,38 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    console.log('poo user disconnected');
+    console.log(socket.id + ' disconnected');
   });
 });
 
-app.listen(port, function() {
+function findOrdersByUsername(username) {
+  let o = [];
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].user.username == username) {
+      o.push(orders[i]);
+    }
+  }
+  return o;
+}
+
+function updateLine() {
+  let newOrders = orders;
+  for (var i = 0; i < newOrders.length; i++) {
+    newOrders[i].user = {
+      username: orders[i].user.username,
+      name: orders[i].user.name,
+      phone: orders[i].user.phone,
+      email: orders[i].user.email
+    }
+  }
+  // console.log(newOrders);
+  io.emit('line update', {
+    orders: newOrders
+  });
+  io.emit('user update');
+  return false;
+}
+
+http.listen(port, function() {
   console.info('listening on *:' + port);
 });

@@ -39,6 +39,9 @@
           "price": {
             "type": "number",
             "minimum": 0
+          },
+          "default": {
+            "type": "boolean"
           }
         }
       }

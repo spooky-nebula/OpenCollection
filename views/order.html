@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Order</title>
+  </head>
+
+  <body>
+    <h1>Order</h1>
+    {% if user.username == "admin" %}
+      <div class="admin">
+        <p>Access the admin dashboard
+          <a href="/line">here</a>
+        </p>
+      </div>
+    {% endif %}
+
+    {% if user %}
+      <div class="profile">
+        <p>
+          Logged in as
+          {{user.name}}
+          ({{user.username}}).
+          <a href="/logout">Logout</a>
+        </p>
+        <p>View your orders
+          <a href="/orders">here</a>
+        </p>
+      </div>
+    {% else %}
+      <div class="profile">
+        <p>
+          Please login
+          <a href="/login">here</a>
+        </p>
+      </div>
+    {% endif %}
+
+    <form class="form" action="/order" method="post">
+      <div class="menu">
+        <h1>Menu</h1>
+      </div>
+      <div class="details">
+        <h1>Details</h1>
+      </div>
+      <div class="cart">
+        <h1>Cart</h1>
+        <div class="items"></div>
+        <div class="cartinfo">
+          <p class="price"></p>
+          <p class="quantity"></p>
+        </div>
+        <div>
+          <input type="submit" value="Order"/>
+          <p>in the name of
+            <span class="name">{{user.name}}</span>
+          </p>
+        </div>
+      </div>
+    </form>
+    <template id="category" hidden="hidden">
+      <div class="category">
+        <h2>nameofcategory</h2>
+        <a href="#" onclick="togglecategory(this);return false;">
+          <p>v</p>
+        </a>
+        <div class="items"></div>
+      </div>
+    </template>
+    <template id="item" hidden="hidden">
+      <div class="item">
+        <a href="#" onclick="selectitem(this);return false;">
+          <data value="id"></data>
+          <img src="imagepath" alt="">
+          <h3>itemname</h3>
+          <p>description</p>
+        </a>
+      </div>
+    </template>
+    <template id="itemdetails" hidden="hidden">
+      <div class="itemdetails">
+        <data value="id"></data>
+        <img src="imagepath" alt="">
+        <h2 class="itemname">itemname</h2>
+        <p class="description">description</p>
+        <p class="price">price</p>
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+        </div>
+        <div class="sauces">
+          <h3>Sauces</h3>
+        </div>
+        <div class="options">
+          <h3>Options</h3>
+        </div>
+        <div class="special">
+          <h4>Special Requests</h4>
+          <p>eg. "Write an X on this wrap"</p>
+          <input type="text" name="special" placeholder="">
+        </div>
+        <a class="addtocart" href="#" onclick="addToCart(this); return false;">Add to Cart</a>
+      </div>
+    </template>
+    <script src="/javascript/socket.io.js"></script>
+    <script>
+      var socket = io();
+      const user = {{user.id}}
+    </script>
+    <script src="/javascript/order.js" charset="utf-8"></script>
+  </body>
+
+</html>

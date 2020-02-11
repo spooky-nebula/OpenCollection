@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Line</title>
+</head>
+
+<body>
+  <h1>Line</h1>
+  <div class="line">
+
+  </div>
+  <template id="order" hidden="hidden">
+    <div class="order">
+      <data value=""></data>
+      <h2>Order for: <span class="name">name</span></h2>
+      <div class="items"></div>
+      <h3 class="total">totalprice</h3>
+      <a href="#" onclick="orderdone(this); return false;" class="orderdone">Order Ready</a>
+      <a href="#" onclick="orderremove(this); return false;" class="orderremove hidden">Remove Order</a>
+    </div>
+  </template>
+  <template id="item" hidden="hidden">
+    <div class="item">
+      <h3 class="itemname">itemname</h3>
+      <p class="ingredients">Ingredients:
+      </p>
+      <p class="sauces">Sauces:
+      </p>
+      <p class="options">Options:
+      </p>
+      <p class="special">Special:
+      </p>
+    </div>
+  </template>
+  <script src="/javascript/socket.io.js"></script>
+  <script>
+    var socket = io();
+  </script>
+  <script src="/javascript/line.js" charset="utf-8"></script>
+</body>
+
+</html>

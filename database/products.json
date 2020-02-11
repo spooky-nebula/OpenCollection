@@ -2,20 +2,29 @@
   "name": "Falafel Wrap",
   "description": "Falafel Wrap with Hummus",
   "available": true,
-  "image": "DSC_9632.jpg",
+  "image": "falafelwrap.jpg",
   "type": "Main",
   "price": 5.00,
   "ingredients": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Sweet Peppers", "Gerkins"],
-  "sauces": ["Tzaziki", "Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"],
+  "sauces": ["Cocunut Yogurt Mint", "Tahina", "Vegan Mayo", "Ketchup", "Hot Chilli"],
   "options": [{
     "name": "Hummus",
+    "default": true,
     "price": 0.00
+  }, {
+    "name": "Gluten-free",
+    "default": false,
+    "price": 0.00
+  }, {
+    "name": "Holloumi",
+    "default": false,
+    "price": 1.00
   }]
 }, {
   "name": "Salad Box",
   "description": "Salad Box with Hummus",
   "available": true,
-  "image": "DSC_9638.jpg",
+  "image": "saladbox.jpg",
   "type": "Main",
   "price": 6.00,
   "ingredients": ["Letuce", "Tomato", "Onion", "Red Cabage", "White Cabbage", "Cucumber", "Vinegar"],
@@ -25,20 +34,20 @@
   "name": "Chips",
   "description": "Homemade Chips",
   "available": true,
-  "image": "DSC_9687.jpg",
+  "image": "chips.jpg",
   "type": "Sides",
   "price": 2.00,
   "ingredients": ["Salt", "Pepper", "Vinegar"],
   "sauces": [],
   "options": []
 }, {
-  "name": "Side Salad",
-  "description": "Homemade Parsip Chips",
-  "available": true,
-  "image": "DSC_9687.jpg",
+  "name": "Sourdough Pita",
+  "description": "Gluten-Free Sourdough Pita",
+  "available": false,
+  "image": "pita.jpg",
   "type": "Sides",
-  "price": 1.60,
-  "ingredients": ["Salt", "Pepper", "Vinegar"],
+  "price": 2.00,
+  "ingredients": [],
   "sauces": [],
   "options": []
 }]
