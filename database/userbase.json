@@ -2,28 +2,35 @@
   "id": 1,
   "username": "jonny99",
   "name": "John Barosa",
-  "password": "verysecretpassword",
+  "password": "c484bd9c5af958bac183733a3afde8ec2a62f41e7832232c7d5548d1efe66d8c",
   "phone": "07437617311",
   "email": "johnbarosa99@aol.live.com"
 }, {
   "id": 2,
   "username": "admin",
   "name": "George",
-  "password": "CmK5rbAd",
+  "password": "0e95873f08efe758fde11c130f666f80ce323726f0f1c50d0a79bafecfe13a92",
   "phone": "07437000000",
   "email": "george@poo.poo"
 }, {
   "id": 3,
   "username": "pedropi99",
   "name": "Pedro Pires",
-  "password": "poopoo",
+  "password": "05ac8744ffc3055bb3ec9c4abdf45bd9f1aa54fefae01b0e2d1a3ffc6beed516",
   "phone": "07437617300",
   "email": ""
 }, {
   "username": "erica99",
   "name": "Érica",
-  "password": "sofia",
+  "password": "86846e84f9bfb2053a4823193843d22a0be24a75d304d6f8a2e4d2fac445efaa",
   "phone": "07436618322",
   "email": "",
   "id": 4
+}, {
+  "username": "nigellius",
+  "name": "Nigel",
+  "password": "e97e4cc35c494c7e948da1b86590db096c4fb3f2d67881e69fafecdf65edc3ec",
+  "phone": "7437618500",
+  "email": "",
+  "id": 5
 }]

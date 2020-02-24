@@ -12,6 +12,8 @@ var port = process.env.PORT || 3000;
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require('./database');
+// Encryption of passwords
+var crypto = require('crypto');
 // Shop availability
 var open = true;
 // Variable to store current orders
@@ -19,6 +21,8 @@ var orders = [];
 
 passport.use(new Strategy(
   function(username, password, cb) {
+    let hash = crypto.createHash('sha256');
+    password = hash.update(password).digest('hex');
     db.database.findByUsername(username, function(err, user) {
       if (err) {
         // console.log("Failed to login");
@@ -137,6 +141,8 @@ app.get('/register', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
+  let hash = crypto.createHash('sha256');
+  req.body.password = hash.update(req.body.password).digest('hex');
   // attach POST to user schema
   var user = {
     username: req.body.username,
@@ -149,9 +155,11 @@ app.post('/register', function(req, res) {
   db.database.save(user, function(err) {
     if (err) {
       console.log(err);
+      res.redirect('/register');
+    } else {
+      res.redirect('/login');
     }
   });
-  res.redirect('/login');
 });
 
 app.get('/logout', function(req, res) {
