@@ -36,18 +36,18 @@ function init() {
       clone.querySelector('h2').innerHTML = types[i];
       for (var j = 0; j < products.length; j++) {
         if (products[j].type == types[i]) {
-          let itemclone = $('#item').content.cloneNode(true);
-          itemclone.querySelector('h3').innerHTML = products[j].name;
-          itemclone.querySelector('img').src = '/assets/' + products[j].image;
+          let item_clone = $('#item').content.cloneNode(true);
+          item_clone.querySelector('h3').innerHTML = products[j].name;
+          item_clone.querySelector('img').src = '/assets/' + products[j].image;
           if (products[j].available) {
-            itemclone.querySelector('data').value = j;
-            itemclone.querySelector('p').innerHTML = products[j].description;
+            item_clone.querySelector('data').value = j;
+            item_clone.querySelector('p').innerHTML = products[j].description;
           } else {
-            itemclone.querySelector('a').classList.add('disabled');
-            itemclone.querySelector('data').value = false;
-            itemclone.querySelector('p').innerHTML = 'Out of Stock';
+            item_clone.querySelector('a').classList.add('disabled');
+            item_clone.querySelector('data').value = false;
+            item_clone.querySelector('p').innerHTML = 'Out of Stock';
           }
-          clone.querySelector('.items').append(itemclone);
+          clone.querySelector('.items').append(item_clone);
         } else {
 
         }
@@ -72,72 +72,72 @@ $('form').addEventListener('submit', function(e) {
   return false;
 }, false);
 
-function togglecategory(element) {
+function toggleCategory(element) {
   return false;
 }
 
-function selectitem(element) {
-  let itemid = element.querySelector('data').value;
-  let item = products[itemid];
-  if (itemid != 'false' && !(element.classList.contains('disabled'))) {
+function selectItem(element) {
+  let item_id = element.querySelector('data').value;
+  let item = products[item_id];
+  if (item_id != 'false' && !(element.classList.contains('disabled'))) {
     try {
-      $('.details').removeChild($(".itemdetails"));
+      $('.details').removeChild($(".item_details"));
     } catch (e) {
       console.error("unable to remove last item details");
       console.error(e);
     }
-    let clone = $('#itemdetails').content.cloneNode(true);
-    clone.querySelector('data').value = itemid;
-    clone.querySelector('h2').innerHTML = products[itemid].name;
-    clone.querySelector('.description').innerHTML = products[itemid].description;
-    clone.querySelector('img').src = '/assets/' + products[itemid].image;
-    clone.querySelector('.price').innerHTML = '£' + (Math.round(products[itemid].price * 100) / 100).toFixed(2);
+    let clone = $('#item_details').content.cloneNode(true);
+    clone.querySelector('data').value = item_id;
+    clone.querySelector('h2').innerHTML = products[item_id].name;
+    clone.querySelector('.description').innerHTML = products[item_id].description;
+    clone.querySelector('img').src = '/assets/' + products[item_id].image;
+    clone.querySelector('.price').innerHTML = '£' + (Math.round(products[item_id].price * 100) / 100).toFixed(2);
     console.log(clone);
     // Ingredients checkbox generator
-    if (products[itemid].ingredients.length > 0) {
-      for (var i = 0; i < products[itemid].ingredients.length; i++) {
+    if (products[item_id].ingredients.length > 0) {
+      for (var i = 0; i < products[item_id].ingredients.length; i++) {
         let finishedHTML;
-        finishedHTML = '<input type="checkbox" name="ingredients" value="' + products[itemid].ingredients[i] + '"id="' + products[itemid].ingredients[i] + '"' + ' checked>';
+        finishedHTML = '<input type="checkbox" name="ingredients" value="' + products[item_id].ingredients[i] + '"id="' + products[item_id].ingredients[i] + '"' + ' checked>';
         clone.querySelector('.ingredients').append(createElementFromHTML(finishedHTML));
-        finishedHTML = '<label for="' + products[itemid].ingredients[i] + '">' + products[itemid].ingredients[i] + '</label>'
+        finishedHTML = '<label for="' + products[item_id].ingredients[i] + '">' + products[item_id].ingredients[i] + '</label>'
         clone.querySelector('.ingredients').append(createElementFromHTML(finishedHTML));
       }
     } else {
-      let parentnode = clone.querySelector('.ingredients').parentElement;
+      let parent_node = clone.querySelector('.ingredients').parentElement;
       let node = clone.querySelector('.ingredients');
-      parentnode.removeChild(node);
+      parent_node.removeChild(node);
     }
     // Sauce checkbox generation
-    if (products[itemid].sauces.length > 0) {
-      for (var i = 0; i < products[itemid].sauces.length; i++) {
+    if (products[item_id].sauces.length > 0) {
+      for (var i = 0; i < products[item_id].sauces.length; i++) {
         let finishedHTML;
-        finishedHTML = '<input type="checkbox" name="sauces" value="' + products[itemid].sauces[i] + '"id="' + products[itemid].sauces[i] + '"' + '>';
+        finishedHTML = '<input type="checkbox" name="sauces" value="' + products[item_id].sauces[i] + '"id="' + products[item_id].sauces[i] + '"' + '>';
         clone.querySelector('.sauces').append(createElementFromHTML(finishedHTML));
-        finishedHTML = '<label for="' + products[itemid].sauces[i] + '">' + products[itemid].sauces[i] + '</label>';
+        finishedHTML = '<label for="' + products[item_id].sauces[i] + '">' + products[item_id].sauces[i] + '</label>';
         clone.querySelector('.sauces').append(createElementFromHTML(finishedHTML));
       }
     } else {
-      let parentnode = clone.querySelector('.sauces').parentElement;
+      let parent_node = clone.querySelector('.sauces').parentElement;
       let node = clone.querySelector('.sauces');
-      parentnode.removeChild(node);
+      parent_node.removeChild(node);
     }
     // Options checkbox generation
-    if (products[itemid].options.length > 0) {
-      for (var i = 0; i < products[itemid].options.length; i++) {
+    if (products[item_id].options.length > 0) {
+      for (var i = 0; i < products[item_id].options.length; i++) {
         let finishedHTML;
-        if (products[itemid].options[i].default) {
-          finishedHTML = '<input type="checkbox" name="options" value="' + products[itemid].options[i].name + '"id="' + products[itemid].options[i].name + '"' + ' checked>';
+        if (products[item_id].options[i].default) {
+          finishedHTML = '<input type="checkbox" name="options" value="' + products[item_id].options[i].name + '"id="' + products[item_id].options[i].name + '"' + ' checked>';
         } else {
-          finishedHTML = '<input type="checkbox" name="options" value="' + products[itemid].options[i].name + '"id="' + products[itemid].options[i].name + '"' + '>';
+          finishedHTML = '<input type="checkbox" name="options" value="' + products[item_id].options[i].name + '"id="' + products[item_id].options[i].name + '"' + '>';
         }
         clone.querySelector('.options').append(createElementFromHTML(finishedHTML));
-        finishedHTML = '<label for="' + products[itemid].options[i].name + '">' + products[itemid].options[i].name + " +£" + (Math.round(products[itemid].options[i].price * 100) / 100).toFixed(2) + '</label>';
+        finishedHTML = '<label for="' + products[item_id].options[i].name + '">' + products[item_id].options[i].name + " +£" + (Math.round(products[item_id].options[i].price * 100) / 100).toFixed(2) + '</label>';
         clone.querySelector('.options').append(createElementFromHTML(finishedHTML));
       }
     } else {
-      let parentnode = clone.querySelector('.options').parentElement;
+      let parent_node = clone.querySelector('.options').parentElement;
       let node = clone.querySelector('.options');
-      parentnode.removeChild(node);
+      parent_node.removeChild(node);
     }
     // Append to the finished item details to the details div on page
     $('.details').append(clone);
@@ -147,52 +147,52 @@ function selectitem(element) {
 
 function addToCart(element) {
   let form = element.parentElement;
-  let productid = form.querySelector('data').value;
+  let product_id = form.querySelector('data').value;
   let item = {};
-  item.name = products[productid].name;
-  item.price = products[productid].price;
+  item.name = products[product_id].name;
+  item.price = products[product_id].price;
   item.ingredients = [];
   item.special = "Nothing special";
-  let formspecial = form.querySelectorAll('input[name="special"]')[0]
+  let form_special = form.querySelectorAll('input[name="special"]')[0]
   try {
-    console.log(formspecial);
-    console.log(formspecial.value);
-    if (formspecial.value != undefined) {
-      item.special = formspecial.value;
+    console.log(form_special);
+    console.log(form_special.value);
+    if (form_special.value != undefined) {
+      item.special = form_special.value;
     }
   } catch (e) {
     console.log("No special requests were found");
   }
-  let formingredients = form.querySelectorAll('input[name="ingredients"]')
+  let form_ingredients = form.querySelectorAll('input[name="ingredients"]')
   try {
-    for (var i = 0; i < formingredients.length; i++) {
-      if (formingredients[i].checked) {
-        item.ingredients.push(formingredients[i].value);
+    for (var i = 0; i < form_ingredients.length; i++) {
+      if (form_ingredients[i].checked) {
+        item.ingredients.push(form_ingredients[i].value);
       }
     }
   } catch (e) {
     console.log("No ingredients were found or checked");
   }
   item.sauces = [];
-  let formsauces = form.querySelectorAll('input[name="sauces"]')
+  let form_sauces = form.querySelectorAll('input[name="sauces"]')
   try {
-    for (var i = 0; i < formsauces.length; i++) {
-      if (formsauces[i].checked) {
-        item.sauces.push(formsauces[i].value);
+    for (var i = 0; i < form_sauces.length; i++) {
+      if (form_sauces[i].checked) {
+        item.sauces.push(form_sauces[i].value);
       }
     }
   } catch (e) {
     console.log("No sauces were found or checked");
   }
   item.options = [];
-  let formoptions = form.querySelectorAll('input[name="options"]')
+  let form_options = form.querySelectorAll('input[name="options"]')
   try {
-    for (var i = 0; i < formoptions.length; i++) {
-      if (formoptions[i].checked) {
-        item.options.push(formoptions[i].value);
-        for (var j = 0; j < products[productid].options.length; j++) {
-          if (formoptions[i].value == products[productid].options[j].name) {
-            item.price += products[productid].options[j].price;
+    for (var i = 0; i < form_options.length; i++) {
+      if (form_options[i].checked) {
+        item.options.push(form_options[i].value);
+        for (var j = 0; j < products[product_id].options.length; j++) {
+          if (form_options[i].value == products[product_id].options[j].name) {
+            item.price += products[product_id].options[j].price;
           }
         }
       }
@@ -206,21 +206,21 @@ function addToCart(element) {
 }
 
 function updateCart() {
-  let cartnode = $('.form .cart');
-  let totalprice = 0;
+  let cart_node = $('.form .cart');
+  let total_price = 0;
   if (cart.items.length > 0) {
-    cartnode.querySelector('.items').innerHTML = '';
+    cart_node.querySelector('.items').innerHTML = '';
     for (var i = 0; i < cart.items.length; i++) {
-      totalprice += cart.items[i].price;
-      cartnode.querySelector('.items').append(createElementFromHTML('<div><p class="name">' + cart.items[i].name + '</p><p class="price">' + cart.items[i].price + '</p><a class="removeitem">-</a></div>'))
+      total_price += cart.items[i].price;
+      cart_node.querySelector('.items').append(createElementFromHTML('<div><p class="name">' + cart.items[i].name + '</p><p class="price">' + cart.items[i].price + '</p><a class="remove_item">-</a></div>'))
     }
   } else {
-    cartnode.querySelector('.items').innerHTML = 'You have no items in cart';
-    cartnode.querySelector('input[value="Order"]');
+    cart_node.querySelector('.items').innerHTML = 'You have no items in cart';
+    cart_node.querySelector('input[value="Order"]');
   }
-  cartnode.querySelector('.cartinfo .price').innerHTML = '£' + (Math.round(totalprice * 100) / 100).toFixed(2);
-  cartnode.querySelector('.cartinfo .quantity').innerHTML = cart.items.length + " items";
-  cart.price = totalprice;
+  cart_node.querySelector('.cart_info .price').innerHTML = '£' + (Math.round(total_price * 100) / 100).toFixed(2);
+  cart_node.querySelector('.cart_info .quantity').innerHTML = cart.items.length + " items";
+  cart.price = total_price;
   console.log(cart);
   return false;
 }

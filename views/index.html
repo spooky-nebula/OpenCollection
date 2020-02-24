@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Home</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <h1>Home</h1>
     {% if user %}
-      You are logged in, you can order for collection
-      <a href="/order">here</a>
+    You are logged in, you can order for collection
+    <a href="/order">here</a>
     {% else %}
-      Please login
-      <a href="/login">here</a>
+    Please login
+    <a href="/login">here</a>
     {% endif %}
-  </body>
+</body>
 
 </html>

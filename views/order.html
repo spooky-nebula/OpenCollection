@@ -47,7 +47,7 @@
       <div class="cart">
         <h1>Cart</h1>
         <div class="items"></div>
-        <div class="cartinfo">
+        <div class="cart_info">
           <p class="price"></p>
           <p class="quantity"></p>
         </div>
@@ -62,7 +62,7 @@
     <template id="category" hidden="hidden">
       <div class="category">
         <h2>nameofcategory</h2>
-        <a href="#" onclick="togglecategory(this);return false;">
+        <a href="#" onclick="toggleCategory(this);return false;">
           <p>v</p>
         </a>
         <div class="items"></div>
@@ -70,7 +70,7 @@
     </template>
     <template id="item" hidden="hidden">
       <div class="item">
-        <a href="#" onclick="selectitem(this);return false;">
+        <a href="#" onclick="selectItem(this);return false;">
           <data value="id"></data>
           <img src="imagepath" alt="">
           <h3>itemname</h3>
@@ -78,8 +78,8 @@
         </a>
       </div>
     </template>
-    <template id="itemdetails" hidden="hidden">
-      <div class="itemdetails">
+    <template id="item_details" hidden="hidden">
+      <div class="item_details">
         <data value="id"></data>
         <img src="imagepath" alt="">
         <h2 class="itemname">itemname</h2>

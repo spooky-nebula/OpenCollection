@@ -12,9 +12,9 @@ let $ = function(query) {
   }
   return result[0];
 };
-
+// Define the orders variables
 var orders;
-var oldorders;
+var old_orders;
 
 function init() {
   console.info("Getting all orders");
@@ -36,11 +36,11 @@ function init() {
   //
   oo = '{"orders":' + oo.replace(/\&quot;/g, '"') + '}';
   try {
-    oldorders = JSON.parse(oo).orders;
+    old_orders = JSON.parse(oo).orders;
     console.info("Old orders found");
-    $(".oldorders").innerHTML = "";
+    $(".old_orders").innerHTML = "";
   } catch (e) {
-    oldorders = {
+    old_orders = {
       orders: []
     };
     console.info("No old orders found");
@@ -51,11 +51,11 @@ function init() {
     clone.querySelector('.date').innerHTML = orders[i].stamp;
     clone.querySelector('.total').innerHTML = 'Total: £' + orders[i].price;
     if (orders[i].ready == true) {
-      clone.querySelector(".orderstatus").innerHTML = "Ready for Pickup!"
+      clone.querySelector(".order_status").innerHTML = "Ready for Pickup!"
     }
     for (var j = 0; j < orders[i].cart.length; j++) {
-      let itemclone = $('#item').content.cloneNode(true);
-      itemclone.querySelector("h3").innerHTML = orders[i].cart[j].name;
+      let item_clone = $('#item').content.cloneNode(true);
+      item_clone.querySelector("h3").innerHTML = orders[i].cart[j].name;
       let ingredientsString = " ";
       let saucesString = " ";
       let optionsString = " ";
@@ -64,58 +64,58 @@ function init() {
           ingredientsString += ingredient + ", ";
         }
         ingredientsString = ingredientsString.slice(0, ingredientsString.length - 2);
-        itemclone.querySelector("p.ingredients").innerHTML += ingredientsString;
+        item_clone.querySelector("p.ingredients").innerHTML += ingredientsString;
       } else {
-        let parentnode = itemclone.querySelector('.ingredients').parentElement;
-        let node = itemclone.querySelector('.ingredients');
-        parentnode.removeChild(node);
+        let parent_node = item_clone.querySelector('.ingredients').parentElement;
+        let node = item_clone.querySelector('.ingredients');
+        parent_node.removeChild(node);
       }
       if (orders[i].cart[j].sauces.length > 0) {
         for (let sauce of orders[i].cart[j].sauces) {
           saucesString += sauce + ", ";
         }
         saucesString = saucesString.slice(0, saucesString.length - 2);
-        itemclone.querySelector("p.sauces").innerHTML += saucesString;
+        item_clone.querySelector("p.sauces").innerHTML += saucesString;
       } else {
-        let parentnode = itemclone.querySelector('.sauces').parentElement;
-        let node = itemclone.querySelector('.sauces');
-        parentnode.removeChild(node);
+        let parent_node = item_clone.querySelector('.sauces').parentElement;
+        let node = item_clone.querySelector('.sauces');
+        parent_node.removeChild(node);
       }
       if (orders[i].cart[j].options.length > 0) {
         for (let option of orders[i].cart[j].options) {
           optionsString += option + ", ";
         }
         optionsString = optionsString.slice(0, optionsString.length - 2);
-        itemclone.querySelector("p.options").innerHTML += optionsString;
+        item_clone.querySelector("p.options").innerHTML += optionsString;
       } else {
-        let parentnode = itemclone.querySelector('.options').parentElement;
-        let node = itemclone.querySelector('.options');
-        parentnode.removeChild(node);
+        let parent_node = item_clone.querySelector('.options').parentElement;
+        let node = item_clone.querySelector('.options');
+        parent_node.removeChild(node);
       }
-      clone.append(itemclone);
+      clone.append(item_clone);
     }
     console.log(clone);
     $('.orders').append(clone);
   }
-  for (var i = 0; i < oldorders.length; i++) {
+  for (var i = 0; i < old_orders.length; i++) {
     let clone = $('#order').content.cloneNode(true);
-    clone.querySelector('h2').innerHTML = oldorders[i].stamp;
-    clone.querySelector('h3').innerHTML = 'Total: £' + oldorders[i].price;
-    let itemclone = $('#item').content.cloneNode(true);
-    for (var j = 0; j < oldorders[i].cart.length; j++) {
-      itemclone.querySelector("h3").innerHTML = oldorders[i].cart[j].name;
-      for (let ingredient of oldorders[i].cart[j].ingredients) {
-        itemclone.querySelector("p.ingredients").innerHTML += ingredient;
+    clone.querySelector('h2').innerHTML = old_orders[i].stamp;
+    clone.querySelector('h3').innerHTML = 'Total: £' + old_orders[i].price;
+    let item_clone = $('#item').content.cloneNode(true);
+    for (var j = 0; j < old_orders[i].cart.length; j++) {
+      item_clone.querySelector("h3").innerHTML = old_orders[i].cart[j].name;
+      for (let ingredient of old_orders[i].cart[j].ingredients) {
+        item_clone.querySelector("p.ingredients").innerHTML += ingredient;
       }
-      for (let sauce of oldorders[i].cart[j].sauces) {
-        itemclone.querySelector("p.sauces").innerHTML += sauce;
+      for (let sauce of old_orders[i].cart[j].sauces) {
+        item_clone.querySelector("p.sauces").innerHTML += sauce;
       }
-      for (let option of oldorders[i].cart[j].options) {
-        itemclone.querySelector("p.options").innerHTML += option;
+      for (let option of old_orders[i].cart[j].options) {
+        item_clone.querySelector("p.options").innerHTML += option;
       }
     }
     console.log(clone);
-    $('.oldorders').append(clone);
+    $('.old_orders').append(clone);
   }
 }
 
