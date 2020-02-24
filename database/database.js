@@ -37,9 +37,32 @@ exports.findByUsername = function(username, cb) {
   });
 }
 
+exports.findByPhone = function(phone, cb) {
+  // console.log("user database access");
+  process.nextTick(function() {
+    for (var i = 0, len = userbase.length; i < len; i++) {
+      var user = userbase[i];
+      if (user.phone === phone) {
+        return cb(null, user);
+      }
+    }
+    return cb(null, null);
+  });
+}
+
 exports.save = function(user, cb) {
   // console.log("user database access");
   process.nextTick(function() {
+    exports.findByUsername(user.username, function(err, user) {
+      if (user) {
+        return cb("Could not create new user: Username already exists", null);
+      }
+    });
+    exports.findByUsername(user.phone, function(err, user) {
+      if (user) {
+        return cb("Could not create new user: User with the same phone number already exists", null);
+      }
+    });
     user.id = userbase.length + 1;
     userbase.push(user);
     fs.writeFile("./database/userbase.json", JSON.stringify(userbase), (err) => {
